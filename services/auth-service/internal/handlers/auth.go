@@ -8,7 +8,7 @@ import (
 	"github.com/dgrijalva/jwt-go"
 )
 
-var jwtSecret = []byte("secret-key") // Should be in .env in production
+var jwtSecret = []byte("secret-key") 
 
 func LoginHandler(w http.ResponseWriter, r *http.Request) {
 	var creds models.Credentials
@@ -18,7 +18,7 @@ func LoginHandler(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// Dummy auth check (replace with DB in production)
+	
 	if creds.Username == "user" && creds.Password == "pass" {
 		token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 			"username": creds.Username,
@@ -37,7 +37,7 @@ func SignupHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid request", http.StatusBadRequest)
 		return
 	}
-	// Save to DB in production
+	
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(map[string]string{"message": "User created"})
 }
